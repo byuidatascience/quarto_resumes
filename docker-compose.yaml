@@ -1,0 +1,12 @@
+services:
+  build_resume:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    container_name: resume_build
+    cpus: 0.5
+    mem_limit: 1024m
+    ports:
+      - "8888:8888"
+    volumes:
+      - ".:/app:rw"

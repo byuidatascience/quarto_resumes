@@ -1,0 +1,106 @@
+---
+title: "J. Hathaway"
+format:
+  html:
+    toc: true
+    grid:
+      sidebar-width: 50px
+      body-width: 800px
+      margin-width: 200px
+      gutter-width: 1.5rem
+  pdf:
+    pdf-engine: weasyprint
+css: cv.css
+execute:
+  echo: false
+format-links: [pdf]
+---
+
+```{python}
+#| tags: [parameters]
+
+email = 'j@jhathaway.io'
+github = 'hathawayj'
+linkedin =  'hathawayj'
+telephone = '208.932.8306'
+```
+
+```{python}
+import polars as pl
+from IPython.display import Markdown
+```
+
+____
+
+:::: {.columns}
+
+::: {.column width="22%"}
+I want to email here is my `{python} Markdown(f'[{email}](mailto:{email})')`
+:::
+
+::: {.column width="1%"}
+:::
+
+::: {.column width="22%"}
+`{python} Markdown(f'[github.com/{github}](https://github.com/{github})')`
+:::
+
+::: {.column width="1%"}
+:::
+
+::: {.column width="22%"}
+`{python} Markdown(f'[linkedin.com/in/{linkedin}](https://www.linkedin.com/in/{linkedin}/)')`
+:::
+
+::: {.column width="1%"}
+:::
+
+
+::: {.column width="22%"}
+`{python} Markdown(f'[{telephone}](tel:{telephone})')`
+:::
+
+
+::::
+
+____
+
+
+
+::: {.print-only .contact-block}
+cynthia.huang@monash.edu
+:::
+
+
+## EDUCATION
+
+**Doctor of Philosophy -- Econometrics and Business Statistics** <br> *Monash University* [*Aug 2021 --- Present*]{.cvdate}
+
+-   New principles and methods for complex data preparation and integration, with applications to official statistics, web-scrapped data and satellite raster images
+-   Monash Data Futures Institute PhD Top-Up Scholarship (2021-2024)
+-   Expected submission date: Nov 2024
+
+## WORK EXPERIENCE{style="page-break-before: always"}
+
+### Data Scientist
+
+***Freelance, Multiple Clients*** [Jan 2020 -- June 2021]{.cvdate}
+
+Providing data collection, pre-processing, exploratory analysis and modelling services to clients in the early R&D stages of developing data driven products. Projects include:
+
+-   Data description and preliminary product feasibility insights for a start-up real estate bond platform; including assessing suitability of various property transaction databases for use in initial product prototype.
+-   Development of statistical anomaly detection regimes and key historical insights from internet quality time-series data for use in parametric insurance products, including documenting analysis tools in an R package.
+
+::: {.no-print}
+## PRESENTATIONS AND WORKSHOPS
+
+-   Talk: [Misadventures with Reproducibility in R](https://github.com/cynthiahqy/rladies-2022-11) (30 Nov 2022, R Ladies Melbourne Meetup)
+-   Talk: [Designing R Packages](https://github.com/cynthiahqy/design-r-magic_2022-10) (4 Oct 2022, Monash EBS Data Science Research Software Study Group)
+-   Talk: [Quarto Websites as Research Compendiums](https://github.com/cynthiahqy/quarto-wiki-template) (16 Aug 2022, Monash EBS Data Science Research Software Study Group)
+-   Workshop: [Writing academic papers with Rmarkdown and friends](https://www.cynthiahqy.com/posts/r-markdown-and-friends/) (9 Aug 2022, Monash University)
+:::
+
+::: {.print-only}
+## References
+Available upon request
+:::

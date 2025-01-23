@@ -1,0 +1,10 @@
+pandas
+polars
+pyarrow
+plotly
+great_tables
+papermill
+nbformat
+quarto
+duckdb
+jupyter
