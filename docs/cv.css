@@ -10,13 +10,21 @@
 
 .cvjobtitle {
   float: left;
-  font-style: bold;
+  font-weight: bold;
   font-size: 25px;
 }
 
 .print-only {
   display: none;
   /*color: aquamarine;*/
+}
+
+#vcenter {
+  vertical-align: middle;
+}
+
+#vtop {
+  vertical-align: top;
 }
 
 /* adapt stylesheet for print
