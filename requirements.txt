@@ -8,3 +8,5 @@ nbformat
 quarto
 duckdb
 jupyter
+nbformat
+nbclient

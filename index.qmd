@@ -1,5 +1,4 @@
 ---
-title: "J. Hathaway"
 format:
   html:
     toc: true
@@ -17,12 +16,24 @@ format-links: [pdf]
 ---
 
 ```{python}
-#| tags: [parameters]
+import polars as pl
+from IPython.display import Markdown
 
-email = 'j@jhathaway.io'
-github = 'hathawayj'
-linkedin =  'hathawayj'
-telephone = '208.932.8306'
+projects = pl.read_parquet("default_tables/projects.parquet")
+skills = pl.read_parquet("default_tables/skills.parquet")
+work = pl.read_parquet("default_tables/work.parquet")
+education = pl.read_parquet("default_tables/education.parquet")
+contact = pl.read_parquet("default_tables/contact.parquet")
+
+```
+
+```{python}
+#| tags: [parameters]
+name_id = contact.select("name").item()
+email_id = contact.select("email").item()
+github_id = contact.select("github").item()
+linkedin_id = contact.select("linkedin").item()
+telephone_id = contact.select("phone").item()
 ```
 
 ```{python}
@@ -30,26 +41,30 @@ import polars as pl
 from IPython.display import Markdown
 ```
 
+
+
+`{python} Markdown(f'# {name_id}')`
+
 ____
 
 :::: {.columns}
 
 ::: {.column width="22%"}
-I want to email here is my `{python} Markdown(f'[{email}](mailto:{email})')`
+`{python} Markdown(f'[{email_id}](mailto:{email_id})')`
 :::
 
 ::: {.column width="1%"}
 :::
 
 ::: {.column width="22%"}
-`{python} Markdown(f'[github.com/{github}](https://github.com/{github})')`
+`{python} Markdown(f'[Github](https://github.com/{github_id})')`
 :::
 
 ::: {.column width="1%"}
 :::
 
 ::: {.column width="22%"}
-`{python} Markdown(f'[linkedin.com/in/{linkedin}](https://www.linkedin.com/in/{linkedin}/)')`
+`{python} Markdown(f'[LinkedIn.com](https://www.linkedin.com/in/{linkedin_id}/)')`
 :::
 
 ::: {.column width="1%"}
@@ -57,50 +72,88 @@ I want to email here is my `{python} Markdown(f'[{email}](mailto:{email})')`
 
 
 ::: {.column width="22%"}
-`{python} Markdown(f'[{telephone}](tel:{telephone})')`
+`{python} Markdown(f'[{telephone_id}](tel:{telephone_id})')`
 :::
 
 
 ::::
 
 ____
-
-
-
-::: {.print-only .contact-block}
-cynthia.huang@monash.edu
-:::
+____
 
 
 ## EDUCATION
 
-**Doctor of Philosophy -- Econometrics and Business Statistics** <br> *Monash University* [*Aug 2021 --- Present*]{.cvdate}
+```{python}
+e1 = education.slice(0,1)
+s1 = e1.select('school').item()
+d1 = e1.select('degree').item()
+ex1 = e1.select(pl.col('expected').dt.to_string("%b %Y")).item()
+```
 
--   New principles and methods for complex data preparation and integration, with applications to official statistics, web-scrapped data and satellite raster images
--   Monash Data Futures Institute PhD Top-Up Scholarship (2021-2024)
--   Expected submission date: Nov 2024
+`{python} Markdown(f'**{d1}** <br> *{s1}* [*Expected: {ex1}*]')`{.cvdate}
 
-## WORK EXPERIENCE{style="page-break-before: always"}
 
-### Data Scientist
+## SKILLS
 
-***Freelance, Multiple Clients*** [Jan 2020 -- June 2021]{.cvdate}
 
-Providing data collection, pre-processing, exploratory analysis and modelling services to clients in the early R&D stages of developing data driven products. Projects include:
+## WORK EXPERIENCE
 
--   Data description and preliminary product feasibility insights for a start-up real estate bond platform; including assessing suitability of various property transaction databases for use in initial product prototype.
--   Development of statistical anomaly detection regimes and key historical insights from internet quality time-series data for use in parametric insurance products, including documenting analysis tools in an R package.
+```{python}
+work1 = work.slice(0,1)
+work2 = work.slice(1,1)
+work3 = work.slice(2,1)
+work4 = work.slice(3,1)
+work5 = work.slice(4,1)
+```
 
-::: {.no-print}
-## PRESENTATIONS AND WORKSHOPS
+```{python}
+p1 = work1.select('position').item()
+c1 = work1.select('company').item()
+l1 = work1.select('location').item()
+s1 = work1.select(pl.col('start').dt.to_string("%b %Y")).item()
+e1 = work1.select(pl.col('end').dt.to_string("%b %Y")).item()
+b1 = work1.select('bullets').item().split("- ")
+```
 
--   Talk: [Misadventures with Reproducibility in R](https://github.com/cynthiahqy/rladies-2022-11) (30 Nov 2022, R Ladies Melbourne Meetup)
--   Talk: [Designing R Packages](https://github.com/cynthiahqy/design-r-magic_2022-10) (4 Oct 2022, Monash EBS Data Science Research Software Study Group)
--   Talk: [Quarto Websites as Research Compendiums](https://github.com/cynthiahqy/quarto-wiki-template) (16 Aug 2022, Monash EBS Data Science Research Software Study Group)
--   Workshop: [Writing academic papers with Rmarkdown and friends](https://www.cynthiahqy.com/posts/r-markdown-and-friends/) (9 Aug 2022, Monash University)
-:::
+```{python}
+b1a = pl.DataFrame({"bullets":b1})\
+  .filter(pl.col("bullets").str.len_chars() > 1)\
+  .item(0, "bullets")
+b1b = pl.DataFrame({"bullets":b1})\
+  .filter(pl.col("bullets").str.len_chars() > 1)\
+  .item(1, "bullets")
+b1c = pl.DataFrame({"bullets":b1})\
+  .filter(pl.col("bullets").str.len_chars() > 1)\
+  .item(2, "bullets")
 
-::: {.print-only}
+```
+
+`{python} Markdown(f'### {p1}')`
+
+`{python} Markdown(f'***{c1}*** [{s1} -- {e1}]')`{.cvdate}
+
+`{python} Markdown(f'- {b1a}')`
+`{python} Markdown(f'- {b1b}')`
+`{python} Markdown(f'- {b1c}')`
+
+
+
+## PROJECTS
+
+
+<!-- ::: {.print-only .contact-block}
+
+::: -->
+
+<!-- ## WORK EXPERIENCE{style="page-break-before: always"} -->
+
+<!-- ::: {.no-print}
+::: -->
+
+<!-- ::: {.print-only}
 ## References
 Available upon request
-:::
+::: -->
+
+

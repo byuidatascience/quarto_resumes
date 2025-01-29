@@ -8,6 +8,12 @@
   font-style: italic
 }
 
+.cvjobtitle {
+  float: left;
+  font-style: bold;
+  font-size: 25px;
+}
+
 .print-only {
   display: none;
   /*color: aquamarine;*/

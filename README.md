@@ -8,7 +8,7 @@ We are going to start from the example of [Cynthia Huang
 
 Use this repo as a template to get your base resume into the format.
 
-# Design Objectives
+### Design Objectives
 
 - Have resume templates
 - store resume information in tables for each section
@@ -19,7 +19,74 @@ Use this repo as a template to get your base resume into the format.
 - build streamlit app to allow users to enter information into the tables
 - provide autobuild method using Github actions
 - provide AI text editing for bullets and description in the streamlit app
-- 
+
+
+### Data Structure
+
+Can we build the templates so they take from the general paradigms? 1) Schooling/Education, 2) Work Experience, 3) Community/Personal Projects, 4) Skills, 5) Publications, 6) Contact Information, 7) Teaching 
+
+#### Schooling
+
+- School:
+- Degree:
+- Graduation\Expected:
+- Location:
+
+#### Work Experience
+
+- Position title:
+- Company name:
+- Location:
+- start date:
+- end date:
+- bullets:
+
+#### Projects
+
+- Project Name:
+- Project Purpose:
+- Github repo:
+- languages:
+- start date:
+- end date:
+
+#### Skills
+
+- skill:
+- details:
+- date start:
+- projects using skill:
+- work using skill:
+
+#### publications
+
+_Should we use a default format for these?_
+
+- Title
+- Authors
+- Journal
+- Publication
+- date
+
+#### Contact information
+
+- Name:
+- Email:
+- github:
+- linkedin:
+- phonenumber:
+
+#### Teaching
+
+- Name:
+- course id:
+- Description:
+- Link:
+- bullets:
+- semesters taught:
+- date start:
+- date end:
+- developed:
 
 ## References
 
