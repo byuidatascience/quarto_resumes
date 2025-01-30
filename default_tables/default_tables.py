@@ -32,7 +32,7 @@ work = pl.DataFrame({
 projects = pl.DataFrame({
   "name": ["Data Informed Resumes"],
   "purpose": ["Automated resume creation based on position using a table centric approach."],
-  "github": ["hathawayj"],
+  "github": ["https://github.com/byuidatascience/quarto_resumes"],
   "languages": ["Python (Polars, Streamlit, GT), JS (React), SQL"],
   "start": ["2024-01-01"],
   "end": ["2024-04-01"]
@@ -40,12 +40,16 @@ projects = pl.DataFrame({
 #### Skills: skill, details, date start, projects using skill, work using skill, 
 
 skills = pl.DataFrame({
-  "skill": ["Python", "R", "SQL"],
+  "topic": ["languages", "languages", "languages", "leadership", "leadership"],
+  "skill": ["Python", "R", "SQL", "Team Management", "Product Design"],
   "details": ["Polars, Streamlit, Plotly, LetsPlot, Pandas",
-    "dplyr, ggplot2, lubridate, purrr, furrr", "Spark, Postgres"],
-  "start":["2023-09-15", "2023-01-15", "2022-09-10"],
-  "projects": ["Data Informed Resumes", pl.Null, "Data Informed Resumes"],
-  "company":["EventX Developers", pl.Null(), "EventX Developers"]
+    "dplyr, ggplot2, lubridate, purrr, furrr",
+    "Spark, Postgres",
+    "Consulting, Team Lead, Project Management, Teacher",
+    "Course developer, Design Thinking, Software Design"],
+  "start":["2023-09-15", "2023-01-15", "2022-09-10", "2020-09-10", "2020-09-10"],
+  "projects": ["Data Informed Resumes", pl.Null(), "Data Informed Resumes", pl.Null(), pl.Null()],
+  "company":["EventX Developers", pl.Null(), "EventX Developers", pl.Null(), pl.Null()]
 }, strict=False).with_columns(pl.col("start").str.to_date())
 #### publications: Title, Authors, Journal, Publication, date
 #### Teaching: Name, course id, Description, Link, bullets, semesters taught, date start, date end, developed,

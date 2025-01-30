@@ -32,9 +32,12 @@ def print_bullets(dat):
     sys.exit("No bullets found.")
   return str_out
 
-def work_chunk(work):
+def work_chunk(work, text=False):
   if work.shape[0] == 0:
-    return Markdown('')
+    if text == False:
+      return Markdown('')
+    else:
+      return ''
   else:
     p1 = work.select('position').item()
     c1 = work.select('company').item()
@@ -45,7 +48,21 @@ def work_chunk(work):
     b1df = pl.DataFrame({"bullets":b1})\
       .filter(pl.col("bullets").str.len_chars() > 1)
     btext = print_bullets(b1df)
-  
-    return Markdown(f'''### {p1}
+    if text == False:
+      return Markdown(f'''### {p1}
   ***{c1}*** [{s1} -- {e1}]{{.cvdate}}
   ''' + btext)
+    else:
+      return f'''### {p1}
+  ***{c1}*** [{s1} -- {e1}]{{.cvdate}}
+  ''' + btext
+
+def projects_dat(projects):
+  pr = projects
+  pr_n = pr.select("name").item()
+  pr_p = pr.select("purpose").item()
+  pr_g = pr.select("github").item()
+  pr_l = pr.select("languages").item()
+  pr_s = pr.select(pl.col('start').dt.to_string("%b %Y")).item()
+  pr_e = pr.select(pl.col('end').dt.to_string("%b %Y")).item()
+  return pr_n, pr_p, pr_g, pr_l, pr_s, pr_e
