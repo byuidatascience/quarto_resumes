@@ -32,7 +32,7 @@ work = pl.read_parquet("default_tables/work.parquet")
 education = pl.read_parquet("default_tables/education.parquet")
 contact = pl.read_parquet("default_tables/contact.parquet")
 
-tab1, tab2, tab3, tab4, tab5 = st.tabs(["Contact Information", "Education", "Skills", "projects", "work"])
+tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(["Contact Information", "Education", "Skills", "projects", "work", "Build Resume"])
 
 with tab1:
   contact_edit = st.data_editor(contact, num_rows="dynamic", hide_index=True, use_container_width=True)
@@ -151,5 +151,34 @@ with tab5:
   st.markdown(work_chunk(work_select, True))
 
 
+with tab6:
+    stab1, stab2, stab3 = st.tabs(["Build", "PDF", "HTML"])
+    
+    with stab1:
+      lists = [a for a in os.listdir() if os.path.isdir(a) if 'tables' in a]
+      pick_template = [a for a in os.listdir() if '.qmd' in a]
+      wfolder = st.selectbox("Pick Data Folder", lists) 
+      if st.button("Store Data"):
+        if "personal_tables" not in lists:
+          os.mkdir("personal_tables")
+        projects_edit.write_parquet(wfolder + "/projects.parquet")
+        skills_edit.write_parquet(wfolder + "/skills.parquet")
+        work_edit.write_parquet(wfolder + "/work.parquet")
+        education_edit.write_parquet(wfolder + "/education.parquet")
+        contact_edit.write_parquet(wfolder + "/contact.parquet")
 
-# pdf_viewer("pricing_request_typst.pdf", width = 800, height = 1000, pages_vertical_spacing = 10)
+      data_folder = st.selectbox("Pick Build Folder", lists)
+      qmd_file = st.selectbox("Pick Quarto Template", pick_template)
+
+      if st.button("Build Resume", use_container_width = True, type = "primary"):
+        quarto.render(qmd_file, execute_params={'dfolder':data_folder})
+
+    with stab2:
+      pdf_viewer("docs/index.pdf", width = 800, height = 1000, pages_vertical_spacing = 10)
+
+    with stab3:
+      HtmlFile = open("docs/index.html", 'r', encoding='utf-8')
+      source_code = HtmlFile.read() 
+      tile = st.container()
+      tile.html(source_code)
+

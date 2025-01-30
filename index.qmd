@@ -16,16 +16,20 @@ format-links: [pdf]
 ---
 
 ```{python}
+#| tags: [parameters]
+dfolder = "default_tables"
+```
+```{python}
 import sys
 import polars as pl
 from IPython.display import Markdown
 from resume_builder import *
 
-projects = pl.read_parquet("default_tables/projects.parquet")
-skills = pl.read_parquet("default_tables/skills.parquet")
-work = pl.read_parquet("default_tables/work.parquet")
-education = pl.read_parquet("default_tables/education.parquet")
-contact = pl.read_parquet("default_tables/contact.parquet")
+projects = pl.read_parquet(dfolder + "/projects.parquet")
+skills = pl.read_parquet(dfolder + "/skills.parquet")
+work = pl.read_parquet(dfolder +"/work.parquet")
+education = pl.read_parquet(dfolder + "/education.parquet")
+contact = pl.read_parquet(dfolder + "/contact.parquet")
 
 ```
 
