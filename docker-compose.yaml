@@ -8,5 +8,6 @@ services:
     mem_limit: 1024m
     ports:
       - "8888:8888"
+      - "8501:8501"
     volumes:
       - ".:/app:rw"

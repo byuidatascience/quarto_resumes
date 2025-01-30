@@ -10,3 +10,6 @@ duckdb
 jupyter
 nbformat
 nbclient
+streamlit
+great_tables
+streamlit-pdf-viewer

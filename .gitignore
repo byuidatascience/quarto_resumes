@@ -1,2 +1,5 @@
 /.quarto/
 .DS_Store
+__pycache__/resume_builder.cpython-39.pyc
+__pycache__/resume_builder.cpython-313.pyc
+__pycache__/resumebuilder.cpython-313.pyc
