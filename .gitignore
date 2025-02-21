@@ -3,3 +3,13 @@
 __pycache__/resume_builder.cpython-39.pyc
 __pycache__/resume_builder.cpython-313.pyc
 __pycache__/resumebuilder.cpython-313.pyc
+tables_ud/contact.csv
+tables_ud/education.csv
+tables_ud/projects.csv
+tables_ud/skills.csv
+tables_ud/work.csv
+tables_personal/contact.csv
+tables_personal/education.csv
+tables_personal/projects.csv
+tables_personal/skills.csv
+tables_personal/work.csv

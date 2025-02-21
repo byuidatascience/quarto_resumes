@@ -1,0 +1,2 @@
+position,company,location,start,end,bullets
+Jnr. Data Scientist,EventX Developers,"Provo, UT",2024-04-01,2100-12-31,"- Supported the transition from PowerBI to Streamlit for dashboarding.- Leveraged Streamlit, Polars, Plotly, and GT to build a fully pythonic dashboard framework.- Automated dashboard development pipeline to save over 300 hours a month in employee time."

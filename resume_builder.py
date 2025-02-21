@@ -1,4 +1,5 @@
 import polars as pl
+import datetime
 from IPython.display import Markdown
 
 def print_bullets(dat):
@@ -43,17 +44,22 @@ def work_chunk(work, text=False):
     c1 = work.select('company').item()
     l1 = work.select('location').item()
     s1 = work.select(pl.col('start').dt.to_string("%b %Y")).item()
-    e1 = work.select(pl.col('end').dt.to_string("%b %Y")).item()
+    # I need to fix e1 to change to 'current' if date listed is greater than today's date
+    e_date = work.select('end').to_series().dt.date().item()
+    if e_date > datetime.date.today():
+      e1 = "current"
+    else:
+      e1 = work.select(pl.col('end').dt.to_string("%b %Y")).item()
     b1 = work.select('bullets').item().split("- ")
     b1df = pl.DataFrame({"bullets":b1})\
       .filter(pl.col("bullets").str.len_chars() > 1)
     btext = print_bullets(b1df)
     if text == False:
-      return Markdown(f'''### {p1}
-  ***{c1}*** [{s1} -- {e1}]{{.cvdate}}
+      return Markdown(f'''#### {p1}
+  {c1} [{s1} -- {e1}]{{.cvdate}}
   ''' + btext)
     else:
-      return f'''### {p1}
+      return f'''#### {p1}
   ***{c1}*** [{s1} -- {e1}]{{.cvdate}}
   ''' + btext
 
@@ -66,3 +72,39 @@ def projects_dat(projects):
   pr_s = pr.select(pl.col('start').dt.to_string("%b %Y")).item()
   pr_e = pr.select(pl.col('end').dt.to_string("%b %Y")).item()
   return pr_n, pr_p, pr_g, pr_l, pr_s, pr_e
+
+def make_ymd_columns(df):
+  if 'end' in df.columns:
+    out = df.with_columns(
+      pl.col('start').dt.year().alias('start_year'),
+      pl.col('start').dt.month().alias('start_month'),
+      pl.col('start').dt.day().alias('start_day'),
+      pl.col('end').dt.year().alias('end_year'),
+      pl.col('end').dt.month().alias('end_month'),
+      pl.col('end').dt.day().alias('end_day'))
+  else:
+    out = df.with_columns(
+      pl.col('start').dt.year().alias('start_year'),
+      pl.col('start').dt.month().alias('start_month'),
+      pl.col('start').dt.day().alias('start_day'))
+  return out
+  
+def education_stuff(dat, slice):
+  e1 = dat.slice(slice,1)
+
+  if e1.shape[0] == 1:
+    school = e1.select('school').item()
+    degree = e1.select('degree').item()
+    start = e1.select(pl.col('start').dt.to_string("%b %Y")).item()
+    end = e1.select('end')
+
+    if end.to_series().item() > datetime.date.today():
+      start_period = "Expected: "
+      end_period = end.select(pl.col('end').dt.to_string("%b %Y")).item()
+    else:
+      start_period = f"{start} - "
+      end_period = end.select(pl.col('end').dt.to_string("%b %Y")).item()
+  
+    return f'**{degree}** <br> *{school}* [*{start_period}{end_period}*]'
+  else:
+    return ''
